@@ -48,6 +48,8 @@ def get_nba_infos():
     for stat in stats_xpaths:
         driver.find_element(by=webdriver.common.by.By.XPATH, value=stats_xpaths[stat]['xpath']).click()
 
+        print('\033[92m' + 'Gathering data about ' + stat +'\033[0m')
+
         element = driver.find_element(by= webdriver.common.by.By.XPATH, value=table_xpath)
         html_content = element.get_attribute('outerHTML')
 
@@ -59,7 +61,9 @@ def get_nba_infos():
 
     driver.quit()
 
+    print('\033[92m' + 'Converting all data to JSON' +'\033[0m')
     dict_to_json(nba_top10_stats)
 
 
 get_nba_infos()
+print('\033[96m' + 'All Done' +'\033[0m')
